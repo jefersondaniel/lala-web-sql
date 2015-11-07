@@ -1,0 +1,25 @@
+{
+  "name": "lala-web-sql",
+  "version": "1.0.0",
+  "authors": [
+    "Jeferson Daniel <jeferson.daniel412@gmail.com>"
+  ],
+  "description": "Simple interface to websql",
+  "main": [
+    "dist/lala-web-sql.js",
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "www/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "underscore": "~1.8.3",
+    "rsvp": "~3.1.0"
+  }
+}
+

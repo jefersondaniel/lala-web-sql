@@ -1,0 +1,14 @@
+{
+  "laxcomma": false,
+  "undef": true,
+  "unused": true,
+  "jasmine": true,
+  "predef": [
+    "RSVP",
+    "_",
+    "module",
+    "openDatabase",
+    "readJSON",
+    "require"
+  ]
+}
