@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="LalaWebSQL : Simple interface to WebSQL">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>LalaWebSQL</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/jefersondaniel/lala-web-sql">View on GitHub</a>
+
+          <h1 id="project_title">LalaWebSQL</h1>
+          <h2 id="project_tagline">Simple interface to WebSQL</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/jefersondaniel/lala-web-sql/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/jefersondaniel/lala-web-sql/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a id="lalawebsql" class="anchor" href="#lalawebsql" aria-hidden="true"><span class="octicon octicon-link"></span></a>LalaWebSQL</h1>
+
+<p><a href="https://circleci.com/gh/jefersondaniel/lala-web-sql/tree/master"><img src="https://circleci.com/gh/jefersondaniel/lala-web-sql/tree/master.svg?style=svg" alt="Circle CI"></a></p>
+
+<p>Simple interface to WebSQL</p>
+
+<h2>
+<a id="install" class="anchor" href="#install" aria-hidden="true"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<p>You can get it on bower.</p>
+
+<pre><code>bower install lala-web-sql --save
+</code></pre>
+
+<h2>
+<a id="creating-and-updating-tables" class="anchor" href="#creating-and-updating-tables" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating and updating tables</h2>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> db <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">LalaWebSQL</span>({
+  name <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>myDatabase<span class="pl-pds">'</span></span>
+});
+
+db.createTable(<span class="pl-s"><span class="pl-pds">'</span>client<span class="pl-pds">'</span></span>, {
+  id <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>pk<span class="pl-pds">'</span></span>,
+  name <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>string<span class="pl-pds">'</span></span>
+}).then(<span class="pl-k">function</span> () {
+  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">'</span>Table sucessfully created<span class="pl-pds">'</span></span>);
+});</pre></div>
+
+<h2>
+<a id="updating-table" class="anchor" href="#updating-table" aria-hidden="true"><span class="octicon octicon-link"></span></a>Updating table</h2>
+
+<div class="highlight highlight-source-js"><pre>db.addColumn(<span class="pl-s"><span class="pl-pds">'</span>client<span class="pl-pds">'</span></span>, {
+  <span class="pl-c1">document</span> <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>string<span class="pl-pds">'</span></span>
+});
+
+db.createIndex(<span class="pl-s"><span class="pl-pds">'</span>client<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>document<span class="pl-pds">'</span></span>, <span class="pl-c1">true</span>); <span class="pl-c">// Parameters: table name, field name, is unique</span></pre></div>
+
+<h2>
+<a id="inserting-rows" class="anchor" href="#inserting-rows" aria-hidden="true"><span class="octicon octicon-link"></span></a>Inserting rows</h2>
+
+<div class="highlight highlight-source-js"><pre>db.insert(<span class="pl-s"><span class="pl-pds">'</span>client<span class="pl-pds">'</span></span>, {
+  name <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Jonh Doe<span class="pl-pds">'</span></span>
+});
+
+db.insertOrReplace(<span class="pl-s"><span class="pl-pds">'</span>client<span class="pl-pds">'</span></span>, {
+  id <span class="pl-k">:</span> <span class="pl-c1">1</span>,
+  name <span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>Jonh Doe<span class="pl-pds">'</span></span>
+});</pre></div>
+
+<h2>
+<a id="building-queries" class="anchor" href="#building-queries" aria-hidden="true"><span class="octicon octicon-link"></span></a>Building queries</h2>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// All results</span>
+
+db.query(<span class="pl-s"><span class="pl-pds">'</span>client<span class="pl-pds">'</span></span>).filter(<span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>Jonh Doe<span class="pl-pds">'</span></span>).then(<span class="pl-k">function</span> (<span class="pl-smi">rows</span>) {
+  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(rows);
+});
+
+<span class="pl-c">// First result</span>
+
+db.query(<span class="pl-s"><span class="pl-pds">'</span>client<span class="pl-pds">'</span></span>).orderBy(<span class="pl-s"><span class="pl-pds">'</span>name<span class="pl-pds">'</span></span>).first().then(<span class="pl-k">function</span> (<span class="pl-smi">row</span>) {
+  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(row);
+});
+
+<span class="pl-c">// Using raw SQL queries</span>
+
+db.query(<span class="pl-s"><span class="pl-pds">'</span>client<span class="pl-pds">'</span></span>).condition(<span class="pl-s"><span class="pl-pds">'</span>age &gt; ?<span class="pl-pds">'</span></span>, [<span class="pl-c1">18</span>]).then(<span class="pl-k">function</span> (<span class="pl-smi">rows</span>) {
+  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(rows);
+});</pre></div>
+
+<h2>
+<a id="delete-rows" class="anchor" href="#delete-rows" aria-hidden="true"><span class="octicon octicon-link"></span></a>Delete rows</h2>
+
+<div class="highlight highlight-source-js"><pre>db.query(<span class="pl-s"><span class="pl-pds">'</span>client<span class="pl-pds">'</span></span>).condition(<span class="pl-s"><span class="pl-pds">'</span>age &gt; ?<span class="pl-pds">'</span></span>, [<span class="pl-c1">18</span>]).del();</pre></div>
+
+<h2>
+<a id="more-examples" class="anchor" href="#more-examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>More examples</h2>
+
+<p><a href="https://github.com/jefersondaniel/lala-web-sql/blob/master/test/lala-web-sql.spec.js">See more examples on unit tests</a></p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">LalaWebSQL maintained by <a href="https://github.com/jefersondaniel">jefersondaniel</a></p>
+        <p>Published with <a href="https://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
