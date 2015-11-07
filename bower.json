@@ -6,7 +6,7 @@
   ],
   "description": "Simple interface to websql",
   "main": [
-    "dist/lala-web-sql.js",
+    "dist/lala-web-sql.js"
   ],
   "license": "MIT",
   "ignore": [

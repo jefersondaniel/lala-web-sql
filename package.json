@@ -4,12 +4,12 @@
   "description": "Simple interface to websql",
   "main": "lala-web-sql.js",
   "scripts": {
-    "test": "gulp check",
-    "build": "gulp build"
+    "test": "bower install; gulp check"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "browserify": "^12.0.1",
     "gulp": "^3.9.0",
     "gulp-jscs": "^2.0.0",
     "gulp-jshint": "^1.12.0",
